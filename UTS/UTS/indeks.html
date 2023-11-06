@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Toko Online</title>
+  <style>
+    /* Stylesheet */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+    }
+    .product {
+      margin-bottom: 20px;
+      padding: 10px;
+      border: 1px solid #ccc;
+    }
+    .cart-item {
+      margin-bottom: 10px;
+      padding: 10px;
+      border: 1px solid #ccc;
+    }
+    .checkout-btn {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      background-color: #4CAF50;
+      color: white;
+      text-align: center;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <h1>Toko Online</h1>
+
+  <!-- Halaman Daftar Produk -->
+  <div id="products">
+    <div class="product">
+      <h3>Produk 1</h3>
+      <p>Harga: Rp 100.000</p>
+      <button onclick="addToCart('Produk 1')">Tambah ke Keranjang</button>
+    </div>
+    <div class="product">
+      <h3>Produk 2</h3>
+      <p>Harga: Rp 200.000</p>
+      <button onclick="addToCart('Produk 2')">Tambah ke Keranjang</button>
+    </div>
+  </div>
+
+  <!-- Halaman Keranjang -->
+  <div id="cart">
+    <h2>Keranjang Belanja</h2>
+    <div id="cart-items">
+      
+    </div>
+    <p>Total Harga: Rp <span id="total-price">0</span></p>
+    <button onclick="checkout()">Checkout Pembayaran</button>
+  </div>
+
+  <div id="checkout">
+    <h2>Checkout Pembayaran</h2>
+    <p>Total Harga: Rp <span id="checkout-price">0</span></p>
+    <p>Data Pembayaran:</p>
+    
+  </div>
+
+  <script>
+    let cartItems = []; 
+
+    function addToCart(productName) {
+      cartItems.push(productName); 
+      showCart(); 
+    }
+
+    
+    function showCart() {
+      let cartItemsContainer = document.getElementById("cart-items");
+      let totalPrice = 0;
+
+      
+      cartItemsContainer.innerHTML = "";
+
+      // Tampilkan produk dalam keranjang
+      cartItems.forEach(function(productName) {
+        let cartItem = document.createElement("div");
+        cartItem.classList.add("cart-item");
+        cartItem.innerHTML = productName;
+        cartItemsContainer.appendChild(cartItem);
+
+        
+        totalPrice += 100000;
+      });
+
+      // Tampilkan total harga
+      document.getElementById("total-price").textContent = totalPrice;
+    }
+
+    function checkout() {
+      let totalPrice = parseInt(document.getElementById("total-price").textContent);
+      document.getElementById("checkout-price").textContent = totalPrice;
+      document.getElementById("products").style.display = "none";
+      document.getElementById("cart").style.display = "none";
+      document.getElementById("checkout").style.display = "block";
+    }
+  </script>
+</body>
+</html>
